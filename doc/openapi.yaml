@@ -1,0 +1,47 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: open_api_example
+  license:
+    name: MIT
+servers:
+  - url: http://localhost:8080/api/
+paths:
+  /user:
+    get:
+      summary: get user information
+      operationId: getUser
+      tags:
+        - User
+      parameters:
+        - name: UserId
+          in: query
+          description: query target user id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: return user information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+components:
+  schemas:
+    User:
+      required:
+        - id
+        - firstName
+        - lastName
+        - age
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        age:
+          type: integer
+          format: int64
